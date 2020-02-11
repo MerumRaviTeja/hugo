@@ -82,5 +82,5 @@ def check_out(request):
         saving = details.attendances.filter(employee=details).last()
         saving =Attendance.objects.get(id=saving.id)
         saving.check_out = datetime.datetime.now()
-        saving.check_out_image.save(f"{request.user}' '{date_time}.png", File(open(f"/hugo/attedance/{request.user}.png", "rb")))
+        #saving.check_out_image.save(f"{request.user}' '{date_time}.png", File(open(f"/hugo/attedance/{request.user}.png", "rb")))
         return render(request, 'check_out_page.html')
