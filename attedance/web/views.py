@@ -38,7 +38,7 @@ def check_in_page(request):
 
 
             saving =Attendance.objects.create(employee=employee_instance,check_in=datetime.datetime.now(),ip_address="43.228.93.193",in_field=True,check_in_image="")
-            saving.check_in_image.save(f"{request.user}' '{date_time}.png", File(open(f"/Hudo_Development-master/Hudo_Development-master/attedance/{request.user}.png", "rb")))
+            saving.check_in_image.save(f"{request.user}' '{date_time}.png", File(open(f"/hugo/attedance/{request.user}.png", "rb")))
 
             return redirect(check_out_redirect)
         except:
@@ -82,5 +82,5 @@ def check_out(request):
         saving = details.attendances.filter(employee=details).last()
         saving =Attendance.objects.get(id=saving.id)
         saving.check_out = datetime.datetime.now()
-        saving.check_out_image.save(f"{request.user}' '{date_time}.png", File(open(f"/Hudo_Development-master/Hudo_Development-master/attedance/{request.user}.png", "rb")))
+        saving.check_out_image.save(f"{request.user}' '{date_time}.png", File(open(f"/hugo/attedance/{request.user}.png", "rb")))
         return render(request, 'check_out_page.html')
