@@ -1,0 +1,63 @@
+ <!DOCTYPE html>
+<html>
+  <head>
+  <script type="text/javascript">
+        function preventBack() { window.history.forward(); }
+        setTimeout("preventBack()", 0);
+        window.onunload = function () { null };
+    </script></head>
+  <body>
+    <!--
+	Ideally these elements aren't created until it's confirmed that the
+	client supports video/camera, but for the sake of illustrating the
+	elements involved, they are created with markup (not JavaScript)
+-->
+
+              {%if not a%}
+                  <form action="/check-in-page/" method="post">
+                      {%csrf_token%}
+                  <video id="video" width="640" height="480" autoplay></video>
+                  <input type="submit" value="Check In" >
+                  <a href="/logout/">Logout</a>
+              {%else%}
+                  <form action="/check-out/" method="post">
+                    {%csrf_token%}
+                  <video id="video" width="640" height="480" autoplay></video>
+                  <input type="submit" value="Check Out">
+                  <a href="/logout/">Logout</a>
+              {%endif%}
+
+              <canvas id="canvas" width="640" height="480"></canvas>
+              <input type="hidden" name="imgSrc" id="imgSrc" />
+              </form>
+                      <button id="snap" >Snap</button>
+
+              <script>
+                // Grab elements, create settings, etc.
+                var video = document.getElementById("video");
+                // Get access to the camera!
+                if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                  // Not adding `{ audio: true }` since we only want video now
+                  navigator.mediaDevices
+                    .getUserMedia({ video: true })
+                    .then(function(stream) {
+                      //video.src = window.URL.createObjectURL(stream);
+                      video.srcObject = stream;
+                      video.play();
+                    });
+                }
+                // Elements for taking the snapshot
+                var canvas = document.getElementById("canvas");
+                var context = canvas.getContext("2d");
+                var video = document.getElementById("video");
+                // Trigger photo take
+                document.getElementById("snap").addEventListener("click", function() {
+                  context.drawImage(video, 0, 0, 640, 480);
+                  var can = document.getElementById("canvas");
+                  document.getElementById("imgSrc").value=can.toDataURL("image/png");
+                  alert(document.getElementId("imgSrc").value());
+                });
+
+              </script>
+  </body>
+</html>

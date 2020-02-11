@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{%if notify%}
+    Already session closed<br>
+    <img src=" {{notify.check_in_image.url}}"><br>
+    checked in on {{notify.check_in}}<br>
+    checked out on {{notify.check_out}}<br>
+{%endif%}
+Thank you<br>
+<a href="/logout/">Logout</a>
+</body>
+</html>
