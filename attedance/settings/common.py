@@ -101,11 +101,11 @@ AUTH_PASSWORD_VALIDATORS = [
 LOGIN_REDIRECT_URL = '/home/'
 LOGOUT_REDIRECT_URL = '/accounts/login/'
 STATIC_URL = "/static/"
-STATIC_ROOT = os.path.join(BASE_DIR, "static-assets", "collected-static")
+STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 
 # Media Settings
-MEDIA_ROOT = "mediafiles"
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 MEDIA_URL = "/media/"
 
 
